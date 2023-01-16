@@ -2,7 +2,7 @@
 
 ### What was the Problem?
 
-`HISTSIZE=1000`
+`HISTSIZE=10000`
 
 ```
 $ history | grep clear | wc -l
