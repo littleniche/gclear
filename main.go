@@ -3,6 +3,7 @@ package main
 import (
 	"time"
 
+	"github.com/littleniche/gclear/internals"
 	"github.com/briandowns/spinner"
 )
 
@@ -24,7 +25,7 @@ func main() {
 	s := spinner.New(spinner.CharSets[11], 100*time.Millisecond)
 	s.Suffix = " Clearing history..."
 
-	currentShell := GetShell()
+	currentShell := internals.GetShell()
 
 	var historyFile Shell
 
@@ -35,15 +36,15 @@ func main() {
 		historyFile = zsh
 	}
 
-	username := GetUsername()
+	username := internals.GetUsername()
 
 	path := "/home/" + username + string(historyFile)
 
 	s.Start()
 	time.Sleep(500 * time.Millisecond)
-	Generate(path)
+	internals.Generate(path)
 	s.Stop()
 
-	Clear(path)
+	internals.Clear(path)
 
 }
