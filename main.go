@@ -3,8 +3,8 @@ package main
 import (
 	"time"
 
-	"github.com/littleniche/gclear/internals"
 	"github.com/briandowns/spinner"
+	"github.com/littleniche/gclear/internals"
 )
 
 type Shell string
@@ -15,15 +15,11 @@ const (
 	fish       = "/.local/share/fish/fish_history"
 )
 
-const (
-	RedText    = "\033[31m"
-	NormalText = "\033[0m"
-)
 
 func main() {
 
 	s := spinner.New(spinner.CharSets[11], 100*time.Millisecond)
-	s.Suffix = " Clearing history..."
+	s.Suffix = " Clearing history...\n"
 
 	currentShell := internals.GetShell()
 
@@ -34,6 +30,8 @@ func main() {
 		historyFile = bash
 	case "zsh":
 		historyFile = zsh
+	case "fish":
+		historyFile = fish
 	}
 
 	username := internals.GetUsername()

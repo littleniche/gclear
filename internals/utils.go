@@ -8,10 +8,16 @@ import (
 	"strings"
 )
 
+const (
+	RedText    = "\033[31m"
+	NormalText = "\033[0m"
+)
+
+
 func GetUsername() string {
 	currentUser, err := user.Current()
 	if err != nil {
-		fmt.Printf("[ERROR] : %v\n", err.Error())
+		ThrowError(err)
 	}
 	return currentUser.Username
 }
@@ -22,7 +28,7 @@ func GetShell() string {
 	var currentShell string
 
 	if err != nil {
-		fmt.Printf("[ERROR] : %v\n", err.Error())
+		ThrowError(err)
 	}
 
 	username := currentUser.Username
@@ -30,7 +36,7 @@ func GetShell() string {
 	readFile, err := os.Open(file_path)
 
 	if err != nil {
-		fmt.Printf("[ERROR] : %v\n", err.Error())
+		ThrowError(err)
 	}
 
 	fileScanner := bufio.NewScanner(readFile)
@@ -53,4 +59,9 @@ func GetShell() string {
 	defer readFile.Close()
 
 	return currentShell
+}
+
+func ThrowError(err error){
+	fmt.Printf("%v[ERROR]%v : %v\n", RedText, NormalText, err.Error())
+	os.Exit(1)
 }

@@ -2,7 +2,6 @@ package internals
 
 import (
 	"bufio"
-	"fmt"
 	"io"
 	"os"
 	"strings"
@@ -13,13 +12,13 @@ func Generate(historyFile string) {
 	readFile, err := os.Open(historyFile)
 
 	if err != nil {
-		fmt.Printf("[ERROR] : %v\n", err.Error())
+		ThrowError(err)
 	}
 
 	tempFile, err := os.Create("/tmp/history.txt")
 
 	if err != nil {
-		fmt.Printf("[ERROR] : %v\n", err.Error())
+		ThrowError(err)
 	}
 
 	fileScanner := bufio.NewScanner(readFile)
@@ -39,7 +38,7 @@ func Generate(historyFile string) {
 			_, err := tempFile.WriteString(line + "\n")
 
 			if err != nil {
-				fmt.Printf("[ERROR] : %v\n", err.Error())
+				ThrowError(err)
 			}
 
 		}
@@ -56,7 +55,7 @@ func Clear(historyFile string) {
 	err := os.Remove(historyFile)
 
 	if err != nil {
-		fmt.Printf("[ERROR] : %v\n", err.Error())
+		ThrowError(err)
 	}
 
 	oldLocation := "/tmp/history.txt"
@@ -65,7 +64,7 @@ func Clear(historyFile string) {
 	copyerr := copy(oldLocation, newLocation)
 
 	if copyerr != nil {
-		fmt.Printf("[ERROR] : %v\n", copyerr.Error())
+		ThrowError(copyerr)
 	}
 
 }
@@ -74,19 +73,19 @@ func copy(src, dst string) error {
 
 	_, err := os.Stat(src)
 	if err != nil {
-		fmt.Printf("[ERROR] : %v\n", err.Error())
+		ThrowError(err)
 	}
 
 	source, err := os.Open(src)
 	if err != nil {
-		fmt.Printf("[ERROR] : %v\n", err.Error())
+		ThrowError(err)
 	}
 
 	defer source.Close()
 
 	destination, err := os.Create(dst)
 	if err != nil {
-		fmt.Printf("[ERROR] : %v\n", err.Error())
+		ThrowError(err)
 	}
 
 	defer destination.Close()

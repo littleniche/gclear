@@ -20,3 +20,4 @@ $ go install github.com/littleniche/gclear@latest
 - `bash`
 - `zsh`
 - `fish`
+

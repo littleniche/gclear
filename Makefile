@@ -1,5 +1,5 @@
 BINARY_NAME=gclear
-INSTALL_DIR=/usr/bin/
+INSTALL_DIR=/usr/local/bin/
 
 all: build 
 
