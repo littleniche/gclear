@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func Generate(historyFile string) {
+func Generate(historyFile string, word string) {
 
 	readFile, err := os.Open(historyFile)
 
@@ -31,7 +31,7 @@ func Generate(historyFile string) {
 
 		commands := split[len(split)-1]
 
-		count := strings.Count(commands, "clear")
+		count := strings.Count(commands, word)
 
 		if count == 0 {
 

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"time"
 
 	"github.com/briandowns/spinner"
@@ -17,6 +18,14 @@ const (
 
 
 func main() {
+
+	var word string = "clear"
+
+	notClear := flag.Bool("w", false, "delete a specific word")
+
+	if ! *notClear {
+		word = flag.Arg(0)
+	}
 
 	s := spinner.New(spinner.CharSets[11], 100*time.Millisecond)
 	s.Suffix = " Clearing history...\n"
@@ -40,7 +49,7 @@ func main() {
 
 	s.Start()
 	time.Sleep(500 * time.Millisecond)
-	internals.Generate(path)
+	internals.Generate(path, word);
 	s.Stop()
 
 	internals.Clear(path)
