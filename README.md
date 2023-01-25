@@ -21,3 +21,12 @@ $ go install github.com/littleniche/gclear@latest
 - `zsh`
 - `fish`
 
+### Usage
+
+```
+$ gclear
+```
+
+```
+$ gclear -w make
+```
