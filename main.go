@@ -22,8 +22,9 @@ func main() {
 	var word string = "clear"
 
 	notClear := flag.Bool("w", false, "delete a specific word")
+	flag.Parse()
 
-	if ! *notClear {
+	if *notClear {
 		word = flag.Arg(0)
 	}
 
